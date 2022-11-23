@@ -1,0 +1,56 @@
+body {
+  background-image: url(/pic/underwater-mines-bombs-.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  margin: auto;
+  padding-top: 200px;
+}
+
+
+table,
+tr,
+td {
+  border: 2px solid blue;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+}
+
+table {
+  margin: auto;
+}
+
+td {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  color: transparent;
+  background-color: white;
+
+}
+
+.cell {
+  text-align: center;
+  background-color: gray;
+}
+
+
+
+.cell:hover {
+  cursor: pointer;
+  background-color: rgb(82, 168, 189);
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: aqua;
+}
+
+.btnClass {
+  text-align: center;
+}
