@@ -1,3 +1,4 @@
+var minesCount = 2
 //uppdate the bomb around field
 function negsNum(board) {
   for (var i = 0; i < board.length; i++) {
@@ -9,19 +10,22 @@ function negsNum(board) {
 }
 
 
-function minesRandLOcation() {
-  var minesCount = 2
-  var i = 0
-  if (gSize === 8) minesCount = 14
-  else if (gSize === 12) minesCount = 32
-  while (i < minesCount) {
-    var indexI = getRandomIntInclusive(0, gSize - 1)
-    var indexJ = getRandomIntInclusive(0, gSize - 1)
+function minesRandLOcation(i, j) {
+  var counter = 0
+  gLevel.MINES = 2
+  if (gLevel.SIZE === 8) gLevel.MINES = 14
+  else if (gLevel.SIZE === 12) gLevel.MINES = 32
+  while (counter < gLevel.MINES) {
+    var indexI = getRandomIntInclusive(0, gLevel.SIZE - 1)
+    var indexJ = getRandomIntInclusive(0, gLevel.SIZE - 1)
+    while (indexI === i && indexJ === j) {
+      indexI = getRandomIntInclusive(0, gLevel.SIZE - 1)
+      indexJ = getRandomIntInclusive(0, gLevel.SIZE - 1)
+    }
     if (!gBoard[indexI][indexJ].isMine) {
       gBoard[indexI][indexJ].isMine = true
-      i++
+      counter++
     }
-
   }
 }
 
@@ -30,56 +34,44 @@ function markMines(elTd, IdxI, IdxJ) {
   var currCell = gBoard[IdxI][IdxJ]
   event.preventDefault()
   currCell.isMarked = (!currCell.isMarked)
-  currCell.isMarked ? gFlagCount++ : gFlagCount--
-  if (currCell.isMarked) elTd.innerText = MARK
-  else elTd.innerText = currCell.minesAroundCount
-  elTd.style.color = 'black'
+  currCell.isMarked ? gGame.markedCount++ : gGame.markedCount--
+  console.log("markedcount", gGame.markedCount);
+  if (currCell.isMarked) {
+    elTd.innerText = MARK
+    elTd.style.color = 'black'
+  }
+  else {
+    if (currCell.isMine) {
+      elTd.innerText = BOMB
+    }
+    else {
+      elTd.innerText = currCell.minesAroundCount
+    }
 
+    elTd.style.color = 'transparent'
+  }
+  setTimeout(() => {
+
+    win();
+  }, "200")
 }
 
-// function isCellZero(i, j) {
+function revelBomb() {
+  for (var i = 0; i < gBoard.length; i++) {
+    for (var j = 0; j < gBoard.length; j++) {
 
-//   var currCell = gBoard[i][j]
-//   if (currCell.minesAroundCount === 0) {
-//     return true
-//   } else return false
-
-// }
-
-
-
-
-
-// function expandShown(elTd, cellI, cellJ) {
-//   // var currCell = gBoard[i][j]
-//   if (isCellZero(cellI, cellJ)) {
-//     elTd.innerText = EMPTY
-//     for (var i = cellI - 1; i <= cellI + 1; i++) {
-//       if (i < 0 || i >= gSize) continue;
-//       for (var j = cellJ - 1; j <= cellJ + 1; j++) {
-//         if (j < 0 || j >= gSize) continue;
-//         if (i === cellI && j === cellJ) continue;
-//         else {
-//           gBoard[i][j].isShown = true
-//           renderCell({ i: i, j: j }, gBoard[i][j].minesAroundCount)
-//         }
-//       }
-//     }
-
-//   }
-
-// }
+      if (gBoard[i][j].isMine) {
+        var currTD = document.querySelector(`.cell-${i}-${j}`)
+        console.log("bomb loop", gBoard[i][j])
+        gBoard[i][j].isShown = true
+        currTD.classList.remove('cell')
+        currTD.style.color = 'red'
+      }
+    }
+  }
+}
 
 
-// function openAutoCell(cellI, cellJ, board) {
-//   var neighborsCount = 0;
-//   for (var i = cellI - 1; i <= cellI + 1; i++) {
-// if (i < 0 || i >= board.length) continue;
-// for (var j = cellJ - 1; j <= cellJ + 1; j++) {
-//   if (j < 0 || j >= board[i].length) continue;
-//   if (i === cellI && j === cellJ) continue;
-//   if (board[i][j].isMine) neighborsCount++;
-//     }
-//   }
-//   return neighborsCount;
-// }
+
+
+

@@ -107,23 +107,44 @@ function countNeighbors(cellI, cellJ, board) {
     return neighborsCount;
 }
 
+function revealNeighbors(cellI, cellJ, board) {
+    for (var i = cellI - 1; i <= cellI + 1; i++) {
+        if (i < 0 || i >= board.length) continue;
+        for (var j = cellJ - 1; j <= cellJ + 1; j++) {
+            if (j < 0 || j >= board[i].length) continue;
+            if (i === cellI && j === cellJ) continue;
+            if (!gBoard[i][j].isShown) {
+                revealCell(i, j)
+            }
+        }
+    }
+}
+
+function revealCell(i, j) {
+    var currTD = document.querySelector(`.cell-${i}-${j}`)
+    gBoard[i][j].isShown = true
+    gGame.shownCount++
+    currTD.classList.remove('cell')
+    currTD.style.color = 'red'
+}
 
 
-// function timer() {
-//     //sec
-//     var elSec = document.querySelector('.sec')
-//     var currSec = elSec.innerText
-//     currSec++
-//     elSec.innerText = currSec
-//     //min
-//     var elMin = document.querySelector('.min')
-//     var currMin = elMin.innerText
-//     if (currSec > 60) {
-//         currMin++
-//         elMin.innerText = currMin
-//         //need to reset the sec
-//         currSec = 0
-//         elSec.innerText = currSec
-//     }
 
-// }
+function timer() {
+    //sec
+    var elSec = document.querySelector('.sec')
+    var currSec = elSec.innerText
+    currSec++
+    elSec.innerText = currSec
+    //min
+    var elMin = document.querySelector('.min')
+    var currMin = elMin.innerText
+    if (currSec > 60) {
+        currMin++
+        elMin.innerText = currMin
+        //need to reset the sec
+        currSec = 0
+        elSec.innerText = currSec
+    }
+
+}
