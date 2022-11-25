@@ -30,6 +30,8 @@ td {
   height: 50px;
   text-align: center;
   color: transparent;
+  font-weight: bold;
+  font-size: large;
   background-color: white;
 
 }

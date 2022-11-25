@@ -62,7 +62,7 @@ function revelBomb() {
 
       if (gBoard[i][j].isMine) {
         var currTD = document.querySelector(`.cell-${i}-${j}`)
-        console.log("bomb loop", gBoard[i][j])
+        // console.log("bomb loop", gBoard[i][j])
         gBoard[i][j].isShown = true
         currTD.classList.remove('cell')
         currTD.style.color = 'red'

@@ -126,6 +126,9 @@ function revealCell(i, j) {
     gGame.shownCount++
     currTD.classList.remove('cell')
     currTD.style.color = 'red'
+    if (currTD.classList.contains('cell')) {
+        gGame.shownCount++
+    }
 }
 
 
@@ -147,4 +150,13 @@ function timer() {
         elSec.innerText = currSec
     }
 
+}
+
+
+function renderLife() {
+    var str = ''
+    for (var i = 0; i < gGame.life; i++) {
+        str += '💙'
+    }
+    return str
 }
