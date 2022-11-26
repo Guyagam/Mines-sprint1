@@ -12,17 +12,21 @@
 
 <body onload="initGame()">
   <h1>Welcome to Mines Sweeper!</h1>
-  <!-- <div class="timer">timer: <span class="min">00</span>:<span class="sec">00</span></div> -->
+  <div class="timer">timer: <span class="min">00</span>:<span class="sec">00</span></div>
   <div class="levelBtn">
     <button onclick=" getLevel(4)">Easy</button>
     <button onclick=" getLevel(8) ">Medium</button>
     <button onclick=" getLevel(12)">Hard</button>
   </div>
   <div class="info">
-    <p>life:<span id="life"></span></p>
-    <button class="smiley" onclick="getLevel(getLevelVal())"></button>
     <p>shown:<span id="shown">0 </span></p>
+    <p>life:<span id="life"></span></p>
   </div>
+  <div class="controlBtn">
+    <button class="safe" onclick="safeClick()">Safe Click!</button>
+    <button class="smiley" onclick="getLevel(getLevelVal())"></button>
+  </div>
+
   <div class="container">
   </div>
   <audio id="mysong1">

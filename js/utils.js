@@ -75,20 +75,25 @@ function createMat(ROWS, COLS) {
 
 
 
-function getRandomCell() {
-    var emptyCells = getEmptyCells()
-    var randIdx = getRandomIntInclusive(0, emptyCells.length - 1)
-    return emptyCells[randIdx]
+function getCellsNotMines() {
+    var cells = []
+    for (var i = 0; i < gBoard.length; i++) {
+        for (var j = 0; j < gBoard.length; j++) {
+            var currCell = gBoard[i][j]
+            if (!currCell.isMine) {
+                cells.push(currCell)
+            }
+        }
+    }
+    return cells
 }
-
 
 function getEmptyCells() {
     const emptyCells = []
     for (var i = 0; i < gBoard.length; i++) {
         for (var j = 0; j < gBoard[0].length; j++) {
-            if (gBoard[i][j].type !== WALL && !gBoard[i][j].gameElement) {
-                emptyCells.push({ i, j })
-            }
+            emptyCells.push({ i, j })
+
         }
     }
     return emptyCells
@@ -108,6 +113,7 @@ function countNeighbors(cellI, cellJ, board) {
 }
 
 function revealNeighbors(cellI, cellJ, board) {
+    gBoard[cellI][cellJ].isVisited = true
     for (var i = cellI - 1; i <= cellI + 1; i++) {
         if (i < 0 || i >= board.length) continue;
         for (var j = cellJ - 1; j <= cellJ + 1; j++) {
@@ -116,6 +122,11 @@ function revealNeighbors(cellI, cellJ, board) {
             if (!gBoard[i][j].isShown) {
                 revealCell(i, j)
             }
+            if (gBoard[i][j].minesAroundCount === 0 && !gBoard[i][j].isMine && !gBoard[i][j].isVisited) {
+                console.log('i', i, 'j', j)
+                revealNeighbors(i, j, board)
+            }
+
         }
     }
 }
@@ -160,3 +171,31 @@ function renderLife() {
     }
     return str
 }
+
+
+
+
+
+// function hideNeighbors(cellI, cellJ, board) {
+//     for (var i = cellI - 1; i <= cellI + 1; i++) {
+//         if (i < 0 || i >= board.length) continue;
+//         for (var j = cellJ - 1; j <= cellJ + 1; j++) {
+//             if (j < 0 || j >= board[i].length) continue;
+//             if (i === cellI && j === cellJ) continue;
+//             if (!gBoard[i][j].isShown) {
+//                 revealCell(i, j)
+
+//             }
+//         }
+//     }
+
+//     function hideCell(i, j) {
+//         var currTD = document.querySelector(`.cell-${i}-${j}`)
+//         gBoard[i][j].isShown = false
+//         gGame.shownCount--
+//         currTD.classList.add('cell')
+//         currTD.style.color = 'transparent'
+//         if (currTD.classList.contains('cell')) {
+//             gGame.shownCount--
+//         }
+//     }

@@ -93,15 +93,20 @@ button:hover {
 .info {
   text-align: center;
   padding: 10px;
-
+  display: flex;
+  justify-content: center;
 }
 
 .smiley {
-  width: 40px;
-  height: 40px;
-  font-size: larger;
+  width: 70px;
+  height: 70px;
+  font-size: 40px;
   border-radius: 50%;
-  margin: 10px;
+  margin: 5px;
+}
+
+p {
+  margin: 12px;
 }
 
 #life {
@@ -120,4 +125,27 @@ p {
   font-size: 20px;
   font-family: cursive;
   color: aqua;
+}
+
+.safe {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: rgb(49, 244, 244);
+  margin: 5px;
+
+}
+
+.timer,
+.timer span {
+  color: aqua;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.controlBtn {
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
