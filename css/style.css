@@ -149,3 +149,8 @@ p {
   display: flex;
   justify-content: center;
 }
+
+.safeTd {
+  background-color: yellow;
+  color: red;
+}

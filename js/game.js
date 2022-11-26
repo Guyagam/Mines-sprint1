@@ -111,11 +111,8 @@ function lose() {
 }
 
 function win() {
-
   if (gGame.shownCount === (gBoard.length ** 2) - gLevel.MINES && gGame.markedCount === gLevel.MINES) {
     clearInterval(gInterval)
-
-
     audio1.pause()
     var audio3 = document.getElementById("mysong3");
     audio3.play();
@@ -132,10 +129,6 @@ function checkAndRevealNeighb(i, j) {
     revealNeighbors(i, j, gBoard)
   }
 }
-
-
-
-
 
 
 function safeClick() {
@@ -161,12 +154,14 @@ function safeClick() {
 
 
 function changeToBase(elTd) {
-  elTd.style.backgroundColor = 'grey'
+  elTd.classList.remove('safeTd')
+  elTd.classList.add('cell')
 
 }
 
 function changeToSafe(elTd) {
-  elTd.style.backgroundColor = 'yellow'
+  elTd.classList.remove('cell')
+  elTd.classList.add('safeTd')
 }
 
 
