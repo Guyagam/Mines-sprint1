@@ -149,7 +149,7 @@ function safeClick() {
     changeToBase(currTD);
   }, "2000")
 
-
+  document.querySelector('#clicks').innerText = gGame.safeClick
 }
 
 
